@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vainky's Video Editing Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* Import Inter font directly in CSS for better reliability */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0A1A; /* Very dark background, almost black */
+            color: #FFFFFF; /* Pure white text for maximum contrast */
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll on subtle animations */
+            /* Subtle radial gradient for depth, mimicking the tech aesthetic */
+            background-image: radial-gradient(circle at center, #1A1A2A 0%, #0A0A1A 70%);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1A1A2A;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00E6E6; /* Bright Cyan */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00B3B3;
+        }
+
+        /* Custom Colors for Behance-like theme */
+        .bg-dark-primary { background-color: #0A0A1A; }
+        .bg-dark-secondary { background-color: #1A1A2A; }
+        .bg-card { background-color: #2A2A3A; }
+        .text-neon-cyan { color: #00E6E6; } /* Bright Cyan */
+        .text-neon-pink { color: #FF007F; } /* Vibrant Pink */
+        .text-neon-purple { color: #8A2BE2; } /* Deep Purple */
+        .border-neon-cyan { border-color: #00E6E6; }
+        .border-neon-pink { border-color: #FF007F; }
+        .border-neon-purple { border-color: #8A2BE2; }
+        .shadow-neon-cyan { box-shadow: 0 0 15px rgba(0, 230, 230, 0.5); }
+        .shadow-neon-pink { box-shadow: 0 0 15px rgba(255, 0, 127, 0.5); }
+        .shadow-neon-purple { box-shadow: 0 0 15px rgba(138, 43, 226, 0.5); }
+
+        /* General section styling */
+        section {
+            padding: 4rem 1rem; /* Increased padding for more breathing room */
+            margin-bottom: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* Deeper shadows */
+            border: 1px solid rgba(255, 255, 255, 0.05); /* Subtle border */
+        }
+
+        /* Hero section specific styles */
+        .hero-section {
+            background: linear-gradient(135deg, #1A1A2A 0%, #0F0F1A 100%);
+            position: relative;
+            overflow: hidden;
+            min-height: 80vh; /* Make hero section taller */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(0,230,230,0.1) 0%, transparent 70%),
+                        radial-gradient(circle at top left, rgba(255,0,127,0.08) 0%, transparent 50%),
+                        radial-gradient(circle at bottom right, rgba(138,43,226,0.08) 0%, transparent 50%);
+            animation: rotateBackground 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes rotateBackground {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 5xl;
+            text-align: center;
+            padding: 2rem;
+            /* Add subtle glow to hero content for more impact */
+            text-shadow: 0 0 10px rgba(255,255,255,0.2);
+        }
+
+        /* Project Card specific styles */
+        .project-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+            border: 1px solid #3A3A4A;
+        }
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 230, 230, 0.3); /* Cyan glow on hover */
+            border-color: #00E6E6; /* Cyan border on hover */
+        }
+
+        /* Button styling */
+        .btn-primary {
+            background-color: #00E6E6; /* Cyan */
+            color: #0F0F1A; /* Dark text */
+            font-weight: 700;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px; /* Fully rounded */
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-shadow: 0 5px 15px rgba(0, 230, 230, 0.3);
+        }
+        .btn-primary:hover {
+            background-color: #00B3B3; /* Darker Cyan */
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 230, 230, 0.5);
+        }
+
+        /* Contact button specific */
+        .contact-btn {
+            background-color: #FF007F; /* Pink */
+            box-shadow: 0 5px 15px rgba(255, 0, 127, 0.3);
+        }
+        .contact-btn:hover {
+            background-color: #CC0066; /* Darker Pink */
+            box-shadow: 0 8px 20px rgba(255, 0, 127, 0.5);
+        }
+
+        /* Text highlights */
+        .highlight-text-cyan {
+            color: #00E6E6;
+        }
+        .highlight-text-pink {
+            color: #FF007F;
+        }
+        .highlight-text-purple {
+            color: #8A2BE2;
+        }
+
+        /* Utility for glowing borders (optional, can be applied to sections or cards) */
+        .glowing-border {
+            position: relative;
+            overflow: hidden;
+        }
+        .glowing-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00E6E6, #FF007F, #8A2BE2, #00E6E6);
+            background-size: 400% 400%;
+            z-index: -1;
+            filter: blur(8px);
+            animation: glowBorder 10s linear infinite;
+        }
+        @keyframes glowBorder {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Skill Bar Styles */
+        .skill-bar-container {
+            background-color: #3A3A4A;
+            border-radius: 0.5rem;
+            height: 1.5rem; /* Height of the bar */
+            overflow: hidden;
+            position: relative;
+            margin-top: 0.5rem;
+        }
+        .skill-bar-fill {
+            height: 100%;
+            border-radius: 0.5rem;
+            background: linear-gradient(to right, #00E6E6, #8A2BE2); /* Cyan to Purple gradient */
+            transform-origin: left; /* Ensure animation starts from left */
+            animation: fillSkillBar 1.5s ease-out forwards; /* Animation on load */
+        }
+
+        @keyframes fillSkillBar {
+            from { width: 0%; }
+            to { width: var(--skill-width); } /* Use CSS variable for target width */
+        }
+
+        /* Multi-Layer Timeline Animation Styles */
+        @keyframes playhead-move-timeline {
+            0% { left: 0%; }
+            100% { left: calc(100% - 10px); } /* Adjust based on playhead width */
+        }
+        @keyframes clip-appear {
+            from { opacity: 0; transform: scaleX(0); }
+            to { opacity: 1; transform: scaleX(1); }
+        }
+        @keyframes sfx-pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+        @keyframes effect-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+
+        .timeline-section-container {
+            background-color: #1A1A2A;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden; /* Hide overflow for clip animations */
+        }
+
+        .timeline-track {
+            position: relative;
+            height: 40px; /* Height of each track */
+            background-color: #2A2A3A;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            padding: 0 5px;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+        }
+        .timeline-track:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-clip-base {
+            height: 30px;
+            border-radius: 4px;
+            margin: 0 3px;
+            flex-shrink: 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            animation: clip-appear 0.8s ease-out forwards;
+            transform-origin: left;
+        }
+        .clip-video {
+            background-color: #00E6E6; /* Cyan for video clips */
+            width: 25%;
+        }
+        .clip-audio {
+            background-color: #FF007F; /* Pink for audio clips */
+            width: 15%;
+        }
+        .clip-effect {
+            background-color: #8A2BE2; /* Purple for effects */
+            width: 10%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: effect-blink 2s infinite alternate;
+        }
+        .clip-sfx {
+            background-color: #FFD700; /* Gold for SFX */
+            width: 8%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: sfx-pulse 1.5s infinite alternate;
+        }
+
+        .playhead-timeline {
+            position: absolute;
+            width: 3px; /* Thin line */
+            height: calc(100% - 20px); /* Span across tracks, with some margin */
+            background-color: #FF4500; /* Orange-Red playhead */
+            box-shadow: 0 0 10px rgba(255, 69, 0, 0.7);
+            animation: playhead-move-timeline 8s linear infinite alternate; /* Slower animation */
+            z-index: 10;
+            top: 10px; /* Align with top of first track */
+        }
+        .playhead-marker-timeline {
+            position: absolute;
+            top: 0;
+            left: 50%; /* Initial position, will be animated by playhead */
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background-color: #FF4500; /* Orange-Red marker */
+            border-radius: 50%;
+            border: 2px solid #FFFFFF;
+            box-shadow: 0 0 15px rgba(255, 69, 0, 0.9);
+            z-index: 11;
+            animation: playhead-move-timeline 8s linear infinite alternate; /* Sync with playhead */
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="min-h-screen flex flex-col items-center">
+        <!-- Hero Section -->
+        <section class="hero-section w-full">
+            <div class="hero-content">
+                <h1 class="text-6xl sm:text-7xl lg:text-8xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg">
+                    Vainky's <br class="sm:hidden"><span class="text-neon-cyan">Video Editing</span> Portfolio
+                </h1>
+                <p class="text-2xl sm:text-3xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                    Crafting Stories, Frame by Frame.
+                </p>
+                <a href="#projects" class="btn-primary text-xl">
+                    Explore My Work
+                </a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="w-full max-w-5xl bg-dark-secondary rounded-xl p-8 sm:p-10 lg:p-12 mt-10">
+            <h2 class="text-4xl font-bold text-white mb-8 border-b-2 border-neon-cyan pb-4">About Vainky</h2>
+            <p class="text-xl text-gray-200 leading-relaxed mb-6">
+                Hello! I'm Vainktesh Tiwari, also known as <span class="font-semibold text-neon-pink">Vainky</span>, a professional video editor with over <span class="font-bold text-neon-cyan">two years of dedicated experience</span> in bringing creative visions to life. I have successfully edited <span class="font-bold text-neon-cyan">more than 500 videos</span>, combining both short and long-form content for various platforms.
+            </p>
+            <p class="text-xl text-gray-200 leading-relaxed mb-6">
+                My journey in video editing has allowed me to collaborate with a diverse range of talented creators, including <span class="font-medium text-neon-purple">Vivanyaarr</span>, <span class="font-medium text-neon-purple">Sarcastic Monk</span>, and <span class="font-medium text-neon-purple">Ayushmaan Bhav</span>, among many others. I am proficient in <span class="font-medium text-neon-pink">Adobe Premiere Pro</span> (2 years of experience), have a beginner's grasp of <span class="font-medium text-neon-pink">Adobe After Effects</span>, and am skilled in <span class="font-medium text-neon-pink">Adobe Photoshop</span> for graphic elements and touch-ups.
+            </p>
+            <p class="text-xl text-gray-200 leading-relaxed">
+                I am passionate about transforming raw footage into compelling narratives, ensuring every edit enhances the story and captivates the audience. My expertise spans various genres and platforms, always striving for excellence and innovation in every project.
+            </p>
+        </section>
+
+        <!-- Skills & Software Section -->
+        <section class="w-full max-w-5xl bg-dark-secondary rounded-xl p-8 sm:p-10 lg:p-12 mt-10">
+            <h2 class="text-4xl font-bold text-white mb-8 border-b-2 border-neon-pink pb-4">Skills & Software</h2>
+            <p class="text-xl text-gray-200 leading-relaxed mb-10">
+                My proficiency in industry-standard software ensures a high level of quality and efficiency in every project.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Adobe Premiere Pro -->
+                <div class="bg-card p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/adobe-premiere-pro-icon.png" alt="Premiere Pro Logo" class="w-16 h-16 mr-4 rounded-lg shadow-lg">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-white">Adobe Premiere Pro</h3>
+                            <p class="text-neon-cyan text-lg">2 Years Experience</p>
+                        </div>
+                    </div>
+                    <div class="skill-bar-container">
+                        <div class="skill-bar-fill" style="--skill-width: 75%;"></div> <!-- Intermediate level -->
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">Intermediate-level proficiency in video editing.</p>
+                </div>
+
+                <!-- Adobe After Effects -->
+                <div class="bg-card p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/adobe-after-effects-icon.png" alt="After Effects Logo" class="w-16 h-16 mr-4 rounded-lg shadow-lg">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-white">Adobe After Effects</h3>
+                            <p class="text-neon-pink text-lg">Beginner Level</p>
+                        </div>
+                    </div>
+                    <div class="skill-bar-container">
+                        <div class="skill-bar-fill" style="--skill-width: 40%;"></div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">Foundational understanding of motion graphics.</p>
+                </div>
+
+                <!-- Adobe Photoshop -->
+                <div class="bg-card p-6 rounded-lg shadow-md md:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/adobe-photoshop-icon.png" alt="Photoshop Logo" class="w-16 h-16 mr-4 rounded-lg shadow-lg">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-white">Adobe Photoshop</h3>
+                            <p class="text-neon-purple text-lg">Beginner Level</p>
+                        </div>
+                    </div>
+                    <div class="skill-bar-container">
+                        <div class="skill-bar-fill" style="--skill-width: 40%;"></div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">Basic proficiency in image manipulation and graphic creation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visual Timeline Section -->
+        <section class="w-full max-w-5xl bg-dark-secondary rounded-xl p-8 sm:p-10 lg:p-12 mt-10">
+            <h2 class="text-4xl font-bold text-white mb-8 border-b-2 border-neon-purple pb-4">My Editing Environment</h2>
+            <p class="text-xl text-gray-200 leading-relaxed mb-10">
+                A visual representation of the multi-layered timelines where creativity unfolds, combining video, audio, and effects.
+            </p>
+
+            <div class="timeline-section-container">
+                <div class="playhead-timeline"></div>
+                <div class="playhead-marker-timeline"></div>
+
+                <div class="timeline-track">
+                    <span class="text-gray-400 text-sm mr-2 w-16 flex-shrink-0">Video 1</span>
+                    <div class="timeline-clip-base clip-video" style="width: 30%;"></div>
+                    <div class="timeline-clip-base clip-video" style="width: 20%;"></div>
+                    <div class="timeline-clip-base clip-effect" style="width: 15%;">FX</div>
+                    <div class="timeline-clip-base clip-video" style="width: 10%;"></div>
+                </div>
+
+                <div class="timeline-track">
+                    <span class="text-gray-400 text-sm mr-2 w-16 flex-shrink-0">Video 2</span>
+                    <div class="timeline-clip-base clip-video" style="width: 10%;"></div>
+                    <div class="timeline-clip-base clip-effect" style="width: 8%;">FX</div>
+                    <div class="timeline-clip-base clip-video" style="width: 35%;"></div>
+                    <div class="timeline-clip-base clip-effect" style="width: 12%;">FX</div>
+                </div>
+
+                <div class="timeline-track">
+                    <span class="text-gray-400 text-sm mr-2 w-16 flex-shrink-0">Audio 1</span>
+                    <div class="timeline-clip-base clip-audio" style="width: 20%;"></div>
+                    <div class="timeline-clip-base clip-sfx" style="width: 5%;">SFX</div>
+                    <div class="timeline-clip-base clip-audio" style="width: 40%;"></div>
+                    <div class="timeline-clip-base clip-sfx" style="width: 7%;">SFX</div>
+                </div>
+
+                <div class="timeline-track">
+                    <span class="text-gray-400 text-sm mr-2 w-16 flex-shrink-0">Audio 2</span>
+                    <div class="timeline-clip-base clip-sfx" style="width: 10%;">SFX</div>
+                    <div class="timeline-clip-base clip-audio" style="width: 30%;"></div>
+                    <div class="timeline-clip-base clip-sfx" style="width: 8%;">SFX</div>
+                    <div class="timeline-clip-base clip-audio" style="width: 15%;"></div>
+                </div>
+
+                <p class="text-sm text-gray-500 mt-6 text-center">
+                    (This animated timeline illustrates a typical multi-track editing setup.)
+                </p>
+            </div>
+        </section>
+
+        <!-- Genre Showcase Section -->
+        <section id="projects" class="w-full max-w-5xl bg-dark-secondary rounded-xl p-8 sm:p-10 lg:p-12 mt-10">
+            <h2 class="text-4xl font-bold text-white mb-10 border-b-2 border-neon-pink pb-4">My Work: A Diverse Portfolio</h2>
+            <p class="text-xl text-gray-200 mb-10">
+                I've had the pleasure of editing a wide array of content, showcasing my adaptability and creative flair across different styles and themes. Below are examples from various genres I've mastered.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Vlogs -->
+                <div class="bg-card p-6 rounded-lg shadow-md project-card">
+                    <h3 class="text-2xl font-semibold text-white mb-4 flex items-center">
+                        <svg class="w-7 h-7 mr-3 text-neon-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                        Vlogs
+                    </h3>
+                    <p class="text-gray-300 mb-4 text-lg">Crafting engaging travel, daily life, and adventure narratives.</p>
+                    <div class="aspect-video bg-dark-primary rounded-lg overflow-hidden flex items-center justify-center border border-gray-700">
+                        <!-- YouTube Embed for Vlogs -->
+                        <iframe
+                            class="w-full h-full"
+                            src="https://www.youtube.com/embed/lwrX7HVvuYA"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                        ></iframe>
+                    </div>
+                </div>
+
+                <!-- Livestream Clips -->
+                <div class="bg-card p-6 rounded-lg shadow-md project-card">
+                    <h3 class="text-2xl font-semibold text-white mb-4 flex items-center">
+                        <svg class="w-7 h-7 mr-3 text-neon-pink" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                        Livestream Clips
+                    </h3>
+                    <p class="text-gray-300 mb-4 text-lg">Highlighting the best moments from live broadcasts.</p>
+                    <div class="aspect-video bg-dark-primary rounded-lg overflow-hidden flex items-center justify-center border border-gray-700">
+                        <!-- Instagram Embed for Livestream Clips -->
+                        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/C_Xytvzy76c/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/reel/C_Xytvzy76c/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; height: 14px; margin-bottom: 6px; width: 100%;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; height: 14px; width: 60%;"></div></div></div><div style="padding: 19% 0;"></div><div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.9 532.1,66.113 541,66.113 C549.9,66.113 557.114,58.9 557.114,50 C557.114,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.045 564.756,66.654 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.653,73.757 556.044,74.244 553.101,74.378 C549.407,74.533 548.333,74.533 541,74.533 C533.666,74.533 532.593,74.533 528.898,74.378 C525.955,74.244 524.346,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.654 516.755,65.045 516.621,62.101 C516.466,58.407 516.466,57.333 516.466,50 C516.466,42.667 516.466,41.593 516.621,37.899 C516.755,34.955 517.244,33.346 517.654,32.338 C518.197,30.94 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.346,26.244 525.955,25.756 528.898,25.622 C532.593,25.467 533.666,25.467 541,25.467 C548.333,25.467 549.407,25.467 553.101,25.622 C556.044,25.756 557.653,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.94 564.346,32.338 C564.756,33.346 565.244,34.955 565.378,37.899 C565.533,41.593 565.533,42.667 565.533,50 C565.533,57.333 565.533,58.407 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C549.414,20.01 548.342,20 541,20 C533.658,20 532.586,20.01 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.833,32.258 511.326,34.438 511.181,37.631 C511.012,41.586 511,42.658 511,50 C511,57.342 511.012,58.414 511.181,62.369 C511.326,65.562 511.833,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.829 C532.586,79.99 533.658,80 541,80 C548.342,80 549.414,79.99 553.369,79.829 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.99,58.414 571,57.342 571,50 C571,42.658 570.99,41.586 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">View this post on Instagram</div></div><div style="padding: 19% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; height: 14px; margin-bottom: 6px; width: 200px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; height: 14px; width: 160px;"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; height: 14px; margin-bottom: 6px; width: 100%;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; height: 14px; width: 100%;"></div></div> <p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/reel/DMQGJoUMYtC/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">A post shared by Vainky (@Vainkyyaarr)</a></p></div></blockquote> <script async src="//www.instagram.com/embed.js"></script>
+                    </div>
+                </div>
+
+                               <!-- Mini Vlogs -->
+                <div class="bg-card p-6 rounded-lg shadow-md project-card">
+                    <h3 class="text-2xl font-semibold text-white mb-4 flex items-center">
+                        <svg class="w-7 h-7 mr-3 text-neon-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                        Mini Vlogs
+                    </h3>
+                    <p class="text-gray-300 mb-4 text-lg">Short, impactful stories for quick consumption.</p>
+                    <div class="aspect-video bg-dark-primary rounded-lg overflow-hidden flex items-center justify-center border border-gray-700">
+                        <!-- Instagram Embed for Mini Vlogs -->
+                        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DMQFZO_tvQp/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/reel/DMQFZO_tvQp/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; height: 14px; margin-bottom: 6px; width: 100%;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; height: 14px; width: 60%;"></div></div></div><div style="padding: 19% 0;"></div><div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.9 532.1,66.113 541,66.113 C549.9,66.113 557.114,58.9 557.114,50 C557.114,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.045 564.756,66.654 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.653,73.757 556.044,74.244 553.101,74.378 C549.407,74.533 548.333,74.533 541,74.533 C533.666,74.533 532.593,74.533 528.898,74.378 C525.955,74.244 524.346,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.654 516.755,65.045 516.621,62.101 C516.466,58.407 516.466,57.333 516.466,50 C516.466,42.667 516.466,41.593 516.621,37.899 C516.755,34.955 517.244,33.346 517.654,32.338 C518.197,30.94 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.346,26.244 525.955,25.756 528.898,25.622 C532.593,25.467 533.666,25.467 541,25.467 C548.333,25.467 549.407,25.467 553.101,25.622 C556.044,25.756 557.653,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.94 564.346,32.338 C564.756,33.346 565.244,34.955 565.378,37.899 C565.533,41.593 565.533,42.667 565.533,50 C565.533,57.333 565.533,58.407 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C549.414,20.01 548.342,20 541,20 C533.658,20 532.586,20.01 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.833,32.258 511.326,34.438 511.181,37.631 C511.012,41.586 511,42.658 511,50 C511,57.342 511.012,58.414 511.181,62.369 C511.326,65.562 511.833,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.829 C532.586,79.99 533.658,80 541,80 C548.342,80 549.414,79.99 553.369,79.829 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.99,58.414 571,57.342 571,50 C571,42.658 570.99,41.586 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">View this post on Instagram</div></div><div style="padding: 19% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; height: 14px; margin-bottom: 6px; width: 200px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; height: 14px; width: 160px;"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; height: 14px; margin-bottom: 6px; width: 100%;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; height: 14px; width: 100%;"></div></div> <p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/reel/DMQFZO_tvQp/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">A post shared by Vainky (@Vainkyyaarr)</a></p></div></blockquote> <script async src="//www.instagram.com/embed.js"></script>
+                    </div>
+                </div>
+
+                <!-- Meme Review -->
+                <div class="bg-card p-6 rounded-lg shadow-md project-card">
+                    <h3 class="text-2xl font-semibold text-white mb-4 flex items-center">
+                        <svg class="w-7 h-7 mr-3 text-neon-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        Meme Review
+                    </h3>
+                  <p class="text-gray-300 mb-4 text-lg">Short, impactful stories for quick consumption.</p>
+                    <div class="aspect-video bg-dark-primary rounded-lg overflow-hidden flex items-center justify-center border border-gray-700">
+                        <!-- Instagram Embed for Mini Vlogs -->
+                        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DLmvT5jMl_t/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/reel/DLmvT5jMl_t/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; height: 14px; margin-bottom: 6px; width: 100%;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; height: 14px; width: 60%;"></div></div></div><div style="padding: 19% 0;"></div><div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.9 532.1,66.113 541,66.113 C549.9,66.113 557.114,58.9 557.114,50 C557.114,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.045 564.756,66.654 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.653,73.757 556.044,74.244 553.101,74.378 C549.407,74.533 548.333,74.533 541,74.533 C533.666,74.533 532.593,74.533 528.898,74.378 C525.955,74.244 524.346,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.654 516.755,65.045 516.621,62.101 C516.466,58.407 516.466,57.333 516.466,50 C516.466,42.667 516.466,41.593 516.621,37.899 C516.755,34.955 517.244,33.346 517.654,32.338 C518.197,30.94 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.346,26.244 525.955,25.756 528.898,25.622 C532.593,25.467 533.666,25.467 541,25.467 C548.333,25.467 549.407,25.467 553.101,25.622 C556.044,25.756 557.653,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.94 564.346,32.338 C564.756,33.346 565.244,34.955 565.378,37.899 C565.533,41.593 565.533,42.667 565.533,50 C565.533,57.333 565.533,58.407 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C549.414,20.01 548.342,20 541,20 C533.658,20 532.586,20.01 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.833,32.258 511.326,34.438 511.181,37.631 C511.012,41.586 511,42.658 511,50 C511,57.342 511.012,58.414 511.181,62.369 C511.326,65.562 511.833,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.829 C532.586,79.99 533.658,80 541,80 C548.342,80 549.414,79.99 553.369,79.829 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.99,58.414 571,57.342 571,50 C571,42.658 570.99,41.586 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">View this post on Instagram</div></div><div style="padding: 19% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; height: 14px; margin-bottom: 6px; width: 200px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; height: 14px; width: 160px;"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; height: 14px; margin-bottom: 6px; width: 100%;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; height: 14px; width: 100%;"></div></div> <p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/reel/DMQFZO_tvQp/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">A post shared by Vainky (@Vainkyyaarr)</a></p></div></blockquote> <script async src="//www.instagram.com/embed.js"></script>
+                    </div>
+                </div>
+
+                <!-- Lifestyle Videos -->
+                <div class="bg-card p-6 rounded-lg shadow-md project-card">
+                    <h3 class="text-2xl font-semibold text-white mb-4 flex items-center">
+                        <svg class="w-7 h-7 mr-3 text-neon-pink" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        Lifestyle Videos
+                    </h3>
+                    <p class="text-gray-300 mb-4 text-lg">Polished and aesthetic edits for lifestyle content.</p>
+                    <div class="aspect-video bg-dark-primary rounded-lg overflow-hidden flex items-center justify-center border border-gray-700">
+                        <!-- Placeholder for Lifestyle Video -->
+                        <iframe
+                            class="w-full h-full"
+                            src="https://www.youtube.com/embed/dQw4w9WgXcQ" <!-- Replace with your actual Lifestyle video embed link -->
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                        ></iframe>
+                    </div>
+                </div>
+
+                <!-- Gaming Videos -->
+                <div class="bg-card p-6 rounded-lg shadow-md project-card">
+                    <h3 class="text-2xl font-semibold text-white mb-4 flex items-center">
+                        <svg class="w-7 h-7 mr-3 text-neon-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+                        Gaming Videos
+                    </h3>
+                    <p class="text-gray-300 mb-4 text-lg">Dynamic and exciting edits for gaming content.</p>
+                    <div class="aspect-video bg-dark-primary rounded-lg overflow-hidden flex items-center justify-center border border-gray-700">
+                        <!-- Placeholder for Gaming Video -->
+                        <iframe
+                            class="w-full h-full"
+                            src="https://www.youtube.com/embed/dQw4w9WgXcQ" <!-- Replace with your actual Gaming video embed link -->
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                        ></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    
+        <!-- Milestone Reels Section -->
+        <section class="w-full max-w-5xl bg-dark-secondary rounded-xl p-8 sm:p-10 lg:p-12 mt-10 text-center">
+            <h2 class="text-4xl font-bold text-white mb-8 border-b-2 border-neon-cyan pb-4">Milestone Reels</h2>
+            <p class="text-xl text-gray-200 leading-relaxed mb-10">
+                I'm proud to have created content that resonates with millions! Many of my reels have touched the million-view mark, with the highest reaching an incredible <span class="font-bold text-neon-pink">100 Million views and counting!</span> This demonstrates my ability to craft viral, highly engaging short-form content.
+            </p>
+            <div class="flex justify-center items-center mb-8">
+                <div class="w-full max-w-md bg-dark-primary rounded-lg overflow-hidden shadow-lg border border-neon-pink p-4">
+                    <h3 class="text-2xl font-semibold text-white mb-4">100 Million Views Reel</h3>
+                    <div class="aspect-square bg-gray-700 rounded-lg overflow-hidden flex items-center justify-center">
+                        <!-- Instagram Embed for Milestone Reel -->
+                        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DJtlj5dRq3x/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/reel/DJtlj5dRq3x/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; height: 14px; margin-bottom: 6px; width: 100%;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; height: 14px; width: 60%;"></div></div></div><div style="padding: 19% 0;"></div><div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.9 532.1,66.113 541,66.113 C549.9,66.113 557.114,58.9 557.114,50 C557.114,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.045 564.756,66.654 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.653,73.757 556.044,74.244 553.101,74.378 C549.407,74.533 548.333,74.533 541,74.533 C533.666,74.533 532.593,74.533 528.898,74.378 C525.955,74.244 524.346,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.654 516.755,65.045 516.621,62.101 C516.466,58.407 516.466,57.333 516.466,50 C516.466,42.667 516.466,41.593 516.621,37.899 C516.755,34.955 517.244,33.346 517.654,32.338 C518.197,30.94 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.346,26.244 525.955,25.756 528.898,25.622 C532.593,25.467 533.666,25.467 541,25.467 C548.333,25.467 549.407,25.467 553.101,25.622 C556.044,25.756 557.653,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.94 564.346,32.338 C564.756,33.346 565.244,34.955 565.378,37.899 C565.533,41.593 565.533,42.667 565.533,50 C565.533,57.333 565.533,58.407 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C549.414,20.01 548.342,20 541,20 C533.658,20 532.586,20.01 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.833,32.258 511.326,34.438 511.181,37.631 C511.012,41.586 511,42.658 511,50 C511,57.342 511.012,58.414 511.181,62.369 C511.326,65.562 511.833,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.829 C532.586,79.99 533.658,80 541,80 C548.342,80 549.414,79.99 553.369,79.829 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.99,58.414 571,57.342 571,50 C571,42.658 570.99,41.586 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">View this post on Instagram</div></div><div style="padding: 19% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; height: 14px; margin-bottom: 6px; width: 200px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; height: 14px; width: 160px;"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; height: 14px; margin-bottom: 6px; width: 100%;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; height: 14px; width: 100%;"></div></div> <p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/reel/DJtlj5dRq3x/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">A post shared by Vainky (@Vainkyyaarr)</a></p></div></blockquote> <script async src="//www.instagram.com/embed.js"></script>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Platform Expertise & Specializations -->
+        <section class="w-full max-w-5xl bg-dark-secondary rounded-xl p-8 sm:p-10 lg:p-12 mt-10">
+            <h2 class="text-4xl font-bold text-white mb-8 border-b-2 border-neon-purple pb-4">Platform Expertise & Specializations</h2>
+
+            <div class="mb-8">
+                <h3 class="text-3xl font-semibold text-white mb-4 flex items-center">
+                    <svg class="w-8 h-8 mr-3 text-neon-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    Platform Expertise
+                </h3>
+                <p class="text-xl text-gray-200 leading-relaxed">
+                    I am highly proficient in optimizing video content for various platforms, ensuring maximum engagement and reach:
+                </p>
+                <ul class="list-disc list-inside text-xl text-gray-200 mt-4 ml-6">
+                    <li><span class="font-medium text-neon-pink">Instagram:</span> Creating captivating short-form videos and reels.</li>
+                    <li><span class="font-medium text-neon-pink">YouTube:</span> Producing both engaging long-form videos and viral short-form content.</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-3xl font-semibold text-white mb-4 flex items-center">
+                    <svg class="w-8 h-8 mr-3 text-neon-pink" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m-4 8h4m10-4h4m-4 4h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"></path></svg>
+                    Specialized Genres
+                </h3>
+                <p class="text-xl text-gray-200 leading-relaxed">
+                    While versatile across genres, I have developed a particular expertise and passion for:
+                </p>
+                <ul class="list-disc list-inside text-xl text-gray-200 mt-4 ml-6">
+                    <li><span class="font-medium text-neon-purple">Comedy:</span> Mastering timing and pacing to deliver maximum comedic impact.</li>
+                    <li><span class="font-medium text-neon-purple">Livestreams:</span> Efficiently cutting and compiling the best moments from live broadcasts.</li>
+                    <li><span class="font-medium text-neon-purple">Vlogs:</span> Expertly editing personal and travel vlogs to create engaging narratives.</li>
+                    <li><span class="font-medium text-neon-purple">Meme Review:</span> Fast-paced editing to highlight humor and reactions in meme-focused content.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Call to Action & Contact Information -->
+        <section class="w-full max-w-5xl bg-dark-secondary rounded-xl p-8 sm:p-10 lg:p-12 mt-10 text-center">
+            <h2 class="text-4xl font-bold text-white mb-8">Let's Create Something Amazing Together!</h2>
+            <p class="text-xl text-gray-200 leading-relaxed mb-10">
+                Ready to elevate your content? Whether it's for YouTube, Instagram, or any other platform, I'm here to help you tell your story.
+            </p>
+            <a href="mailto:workwithvainky@gmail.com" class="btn-primary contact-btn text-xl">
+                Get in Touch
+            </a>
+
+            <div class="mt-12 text-xl">
+                <h3 class="text-3xl font-semibold text-white mb-6 border-b-2 border-neon-cyan pb-3 inline-block">Contact Details</h3>
+                <p class="mt-6 flex items-center justify-center text-gray-200">
+                    <svg class="w-6 h-6 mr-3 text-neon-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    <span class="font-semibold">Gmail:</span> <a href="mailto:workwithvainky@gmail.com" class="text-neon-cyan hover:underline ml-2">workwithvainky@gmail.com</a>, <a href="mailto:info.bussiness.vivan@gmail.com" class="text-neon-cyan hover:underline ml-2">info.bussiness.vivan@gmail.com</a>
+                </p>
+                <p class="mt-4 flex items-center justify-center">
+                    <svg class="w-6 h-6 mr-3 text-neon-pink" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H2v-2a3 3 0 015.356-1.857M17 20v-2c0-.653-.106-1.294-.314-1.898M20.24 12.24a1 1 0 000-1.414L18.707 9.707a1 1 0 00-1.414 0L15.879 11.12a1 1 0 000 1.414l1.535 1.536a1 1 0 001.414 0l1.414-1.414z"></path></svg>
+                    <span class="font-semibold">Instagram:</span> <a href="https://www.instagram.com/Vainkyyaarr" target="_blank" rel="noopener noreferrer" class="text-neon-pink hover:underline ml-2">@Vainkyyaarr</a>
+                </p>
+            </div>
+        </section>
+    </div>
+    <!-- Instagram Embed Script (required for Instagram embeds to render) -->
+    <script async src="//www.instagram.com/embed.js"></script>
+</body>
+</html>
